@@ -2,17 +2,18 @@ import React from 'react';
 import Form from './components/Form/Form';
 import Titles from './components/Titles/Titles';
 import Weather from './components/Weather/Weather';
+import Axios from 'axios';
 
 const API_KEY = 'eb8a234d14cce1fc96c42d10452ff683';
 
 class App extends React.Component {
   state = {
-    temperature: undefined,
-    city: undefined,
-    country: undefined,
-    humidity: undefined,
-    description: undefined,
-    error: undefined
+    temperature: '',
+    city: '',
+    country: '',
+    humidity: '',
+    description: '',
+    error: false
   }
 
 getWeather = async (e) => {
@@ -25,9 +26,9 @@ const country = e.target.elements.country.value;
 e.preventDefault();
 
   const api_call = await 
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
+  Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
   
-  const response = await api_call.json();
+  const response = api_call.data;
   if(city && country){
   this.setState({
     temperature: response.main.temp,
