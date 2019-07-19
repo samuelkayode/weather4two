@@ -26,7 +26,7 @@ class App extends React.Component {
     e.preventDefault();
     try {
       const api_call = await
-        Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
+        Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`);
 
       const response = api_call.data;
       console.log(response);
